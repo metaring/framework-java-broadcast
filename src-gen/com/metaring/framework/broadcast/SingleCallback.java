@@ -66,6 +66,34 @@ public class SingleCallback implements GeneratedCoreType {
         return singleCallback;
     }
 
+    public static SingleCallback fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        String address = null;
+        if(dataRepresentation.hasProperty("address")) {
+            try {
+                address = dataRepresentation.getText("address");
+            } catch (Exception e) {
+            }
+        }
+
+        Event data = null;
+        if(dataRepresentation.hasProperty("data")) {
+            try {
+                data = dataRepresentation.get("data", Event.class);
+            } catch (Exception e) {
+            }
+        }
+
+        SingleCallback singleCallback = create(address, data);
+        return singleCallback;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (address != null) {

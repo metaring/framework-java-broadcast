@@ -13,19 +13,19 @@ import java.lang.Boolean;
 
 public class BroadcastFunctionalitiesManager extends FunctionalitiesManager implements GeneratedFunctionalitiesManager {
 
-    public static final FunctionalityInfo CALLBACK = FunctionalityInfo.create("com.metaring.framework.broadcast.callback", true, false, false, "com.metaring.framework.broadcast.Event", null);
+    public static final FunctionalityInfo CALLBACK = CallbackFunctionality.INFO;
 
-    public static final FunctionalityInfo CONTACT = FunctionalityInfo.create("com.metaring.framework.broadcast.contact", true, false, false, "com.metaring.framework.broadcast.SingleCallback", null);
+    public static final FunctionalityInfo CONTACT = ContactFunctionality.INFO;
 
-    public static final FunctionalityInfo CONTACT_ALL = FunctionalityInfo.create("com.metaring.framework.broadcast.contactAll", true, false, false, "com.metaring.framework.broadcast.MultipleCallback", null);
+    public static final FunctionalityInfo CONTACT_ALL = ContactAllFunctionality.INFO;
 
-    public static final FunctionalityInfo EMIT = FunctionalityInfo.create("com.metaring.framework.broadcast.emit", true, false, false, "com.metaring.framework.broadcast.Event", null);
+    public static final FunctionalityInfo EMIT = EmitFunctionality.INFO;
 
-    public static final FunctionalityInfo IS_SUBSCRIBED = FunctionalityInfo.create("com.metaring.framework.broadcast.isSubscribed", true, false, false, "java.lang.String", "java.lang.Boolean");
+    public static final FunctionalityInfo IS_SUBSCRIBED = IsSubscribedFunctionality.INFO;
 
-    public static final FunctionalityInfo SUBSCRIBE = FunctionalityInfo.create("com.metaring.framework.broadcast.subscribe", true, false, false, "java.lang.String", null);
+    public static final FunctionalityInfo SUBSCRIBE = SubscribeFunctionality.INFO;
 
-    public static final FunctionalityInfo UNSUBSCRIBE = FunctionalityInfo.create("com.metaring.framework.broadcast.unsubscribe", true, false, false, "java.lang.String", null);
+    public static final FunctionalityInfo UNSUBSCRIBE = UnsubscribeFunctionality.INFO;
 
     public static final CompletableFuture<Void> callback(Event event) {
         return call(CALLBACK, CallbackFunctionality.class, getCallingFunctionality(), event, null);

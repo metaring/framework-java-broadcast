@@ -65,6 +65,34 @@ public class Event implements GeneratedCoreType {
         return event;
     }
 
+    public static Event fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        String topic = null;
+        if(dataRepresentation.hasProperty("topic")) {
+            try {
+                topic = dataRepresentation.getText("topic");
+            } catch (Exception e) {
+            }
+        }
+
+        DataRepresentation payload = null;
+        if(dataRepresentation.hasProperty("payload")) {
+            try {
+                payload = dataRepresentation.get("payload");
+            } catch (Exception e) {
+            }
+        }
+
+        Event event = create(topic, payload);
+        return event;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (topic != null) {

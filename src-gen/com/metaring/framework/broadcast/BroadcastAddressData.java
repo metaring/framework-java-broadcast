@@ -65,6 +65,34 @@ public class BroadcastAddressData implements GeneratedCoreType {
         return broadcastAddressData;
     }
 
+    public static BroadcastAddressData fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        String address = null;
+        if(dataRepresentation.hasProperty("address")) {
+            try {
+                address = dataRepresentation.getText("address");
+            } catch (Exception e) {
+            }
+        }
+
+        String newAddress = null;
+        if(dataRepresentation.hasProperty("newAddress")) {
+            try {
+                newAddress = dataRepresentation.getText("newAddress");
+            } catch (Exception e) {
+            }
+        }
+
+        BroadcastAddressData broadcastAddressData = create(address, newAddress);
+        return broadcastAddressData;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (address != null) {

@@ -1,14 +1,18 @@
 package com.metaring.framework.broadcast;
 
-import com.metaring.framework.SysKB;
 import java.util.concurrent.CompletableFuture;
 import com.metaring.framework.functionality.AbstractFunctionality;
 import com.metaring.framework.functionality.GeneratedFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 
-public abstract class SubscribeFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class SubscribeFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected SubscribeFunctionality(SysKB sysKB) {
-        super(sysKB, BroadcastFunctionalitiesManager.SUBSCRIBE, null);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.framework.broadcast.subscribe", true, false, false, "java.lang.String", null);
+
+    static final SubscribeFunctionality INSTANCE = new SubscribeFunctionalityImpl();
+
+    protected SubscribeFunctionality() {
+        super(INFO, null);
     }
 
     @Override
@@ -109,9 +113,5 @@ public abstract class SubscribeFunctionality extends AbstractFunctionality imple
     @Override
     protected final Object getInputFromJsonWork(String inputJson) {
         return inputJson == null ? null : inputJson.trim().isEmpty() ? null : inputJson.equals("null") ? null : inputJson.substring(1, inputJson.length() - 1);
-    }
-
-    protected static final SubscribeFunctionality create(SysKB sysKB) {
-        return new SubscribeFunctionalityImpl(sysKB);
     }
 }

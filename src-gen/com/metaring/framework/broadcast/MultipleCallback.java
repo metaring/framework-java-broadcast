@@ -67,6 +67,34 @@ public class MultipleCallback implements GeneratedCoreType {
         return multipleCallback;
     }
 
+    public static MultipleCallback fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        TextSeries addresses = null;
+        if(dataRepresentation.hasProperty("addresses")) {
+            try {
+                addresses = dataRepresentation.getTextSeries("addresses");
+            } catch (Exception e) {
+            }
+        }
+
+        Event data = null;
+        if(dataRepresentation.hasProperty("data")) {
+            try {
+                data = dataRepresentation.get("data", Event.class);
+            } catch (Exception e) {
+            }
+        }
+
+        MultipleCallback multipleCallback = create(addresses, data);
+        return multipleCallback;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (addresses != null) {

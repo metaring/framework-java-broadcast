@@ -1,15 +1,19 @@
 package com.metaring.framework.broadcast;
 
-import com.metaring.framework.SysKB;
 import java.util.concurrent.CompletableFuture;
 import com.metaring.framework.functionality.AbstractFunctionality;
 import com.metaring.framework.functionality.GeneratedFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 import com.metaring.framework.broadcast.MultipleCallback;
 
-public abstract class ContactAllFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class ContactAllFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected ContactAllFunctionality(SysKB sysKB) {
-        super(sysKB, BroadcastFunctionalitiesManager.CONTACT_ALL, null);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.framework.broadcast.contactAll", true, false, false, "com.metaring.framework.broadcast.MultipleCallback", null);
+
+    static final ContactAllFunctionality INSTANCE = new ContactAllFunctionalityImpl();
+
+    protected ContactAllFunctionality() {
+        super(INFO, null);
     }
 
     @Override
@@ -110,9 +114,5 @@ public abstract class ContactAllFunctionality extends AbstractFunctionality impl
     @Override
     protected final Object getInputFromJsonWork(String inputJson) {
         return MultipleCallback.fromJson(inputJson);
-    }
-
-    protected static final ContactAllFunctionality create(SysKB sysKB) {
-        return new ContactAllFunctionalityImpl(sysKB);
     }
 }

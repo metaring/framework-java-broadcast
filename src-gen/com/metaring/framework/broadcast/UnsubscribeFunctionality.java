@@ -1,14 +1,18 @@
 package com.metaring.framework.broadcast;
 
-import com.metaring.framework.SysKB;
 import java.util.concurrent.CompletableFuture;
 import com.metaring.framework.functionality.AbstractFunctionality;
 import com.metaring.framework.functionality.GeneratedFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 
-public abstract class UnsubscribeFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class UnsubscribeFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected UnsubscribeFunctionality(SysKB sysKB) {
-        super(sysKB, BroadcastFunctionalitiesManager.UNSUBSCRIBE, null);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.framework.broadcast.unsubscribe", true, false, false, "java.lang.String", null);
+
+    static final UnsubscribeFunctionality INSTANCE = new UnsubscribeFunctionalityImpl();
+
+    protected UnsubscribeFunctionality() {
+        super(INFO, null);
     }
 
     @Override
@@ -109,9 +113,5 @@ public abstract class UnsubscribeFunctionality extends AbstractFunctionality imp
     @Override
     protected final Object getInputFromJsonWork(String inputJson) {
         return inputJson == null ? null : inputJson.trim().isEmpty() ? null : inputJson.equals("null") ? null : inputJson.substring(1, inputJson.length() - 1);
-    }
-
-    protected static final UnsubscribeFunctionality create(SysKB sysKB) {
-        return new UnsubscribeFunctionalityImpl(sysKB);
     }
 }

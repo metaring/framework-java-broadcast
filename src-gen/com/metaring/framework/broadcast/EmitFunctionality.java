@@ -1,15 +1,19 @@
 package com.metaring.framework.broadcast;
 
-import com.metaring.framework.SysKB;
 import java.util.concurrent.CompletableFuture;
 import com.metaring.framework.functionality.AbstractFunctionality;
 import com.metaring.framework.functionality.GeneratedFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 import com.metaring.framework.broadcast.Event;
 
-public abstract class EmitFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class EmitFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected EmitFunctionality(SysKB sysKB) {
-        super(sysKB, BroadcastFunctionalitiesManager.EMIT, null);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.framework.broadcast.emit", true, false, false, "com.metaring.framework.broadcast.Event", null);
+
+    static final EmitFunctionality INSTANCE = new EmitFunctionalityImpl();
+
+    protected EmitFunctionality() {
+        super(INFO, null);
     }
 
     @Override
@@ -110,9 +114,5 @@ public abstract class EmitFunctionality extends AbstractFunctionality implements
     @Override
     protected final Object getInputFromJsonWork(String inputJson) {
         return Event.fromJson(inputJson);
-    }
-
-    protected static final EmitFunctionality create(SysKB sysKB) {
-        return new EmitFunctionalityImpl(sysKB);
     }
 }

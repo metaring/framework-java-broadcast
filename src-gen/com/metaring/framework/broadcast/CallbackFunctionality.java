@@ -1,15 +1,19 @@
 package com.metaring.framework.broadcast;
 
-import com.metaring.framework.SysKB;
 import java.util.concurrent.CompletableFuture;
 import com.metaring.framework.functionality.AbstractFunctionality;
 import com.metaring.framework.functionality.GeneratedFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 import com.metaring.framework.broadcast.Event;
 
-public abstract class CallbackFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class CallbackFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected CallbackFunctionality(SysKB sysKB) {
-        super(sysKB, BroadcastFunctionalitiesManager.CALLBACK, null);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.framework.broadcast.callback", true, false, false, "com.metaring.framework.broadcast.Event", null);
+
+    static final CallbackFunctionality INSTANCE = new CallbackFunctionalityImpl();
+
+    protected CallbackFunctionality() {
+        super(INFO, null);
     }
 
     @Override
@@ -110,9 +114,5 @@ public abstract class CallbackFunctionality extends AbstractFunctionality implem
     @Override
     protected final Object getInputFromJsonWork(String inputJson) {
         return Event.fromJson(inputJson);
-    }
-
-    protected static final CallbackFunctionality create(SysKB sysKB) {
-        return new CallbackFunctionalityImpl(sysKB);
     }
 }
