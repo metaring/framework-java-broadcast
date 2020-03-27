@@ -18,8 +18,6 @@ package com.metaring.framework.broadcast;
 
 import java.util.concurrent.CompletableFuture;
 
-import com.ea.async.Async;
-
 public class SubscribeFunctionalityImpl extends SubscribeFunctionality {
 
     @Override
@@ -33,7 +31,7 @@ public class SubscribeFunctionalityImpl extends SubscribeFunctionality {
         if(address.equals(input)) {
             return end;
         }
-        return Async.await(BroadcastControllerManager.INSTANCE).subscribe(BroadcastAddressData.create(address, input), EXECUTOR);
+        return BroadcastController.subscribe(BroadcastAddressData.create(address, input), EXECUTOR);
     }
 
     @Override

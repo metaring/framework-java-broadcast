@@ -18,7 +18,6 @@ package com.metaring.framework.broadcast;
 
 import java.util.concurrent.CompletableFuture;
 
-import com.ea.async.Async;
 import com.metaring.framework.util.StringUtil;
 
 public class IsSubscribedFunctionalityImpl extends IsSubscribedFunctionality {
@@ -34,7 +33,7 @@ public class IsSubscribedFunctionalityImpl extends IsSubscribedFunctionality {
         if(StringUtil.isNullOrEmpty(address)) {
             return end(false);
         }
-        return Async.await(BroadcastControllerManager.INSTANCE).isSubscribed(BroadcastAddressData.create(address, input), EXECUTOR);
+        return end(BroadcastController.isSubscribed(BroadcastAddressData.create(address, input)));
       }
 
     @Override

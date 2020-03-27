@@ -18,8 +18,6 @@ package com.metaring.framework.broadcast;
 
 import java.util.concurrent.CompletableFuture;
 
-import com.ea.async.Async;
-
 public class UnsubscribeFunctionalityImpl extends UnsubscribeFunctionality {
 
     @Override
@@ -33,7 +31,8 @@ public class UnsubscribeFunctionalityImpl extends UnsubscribeFunctionality {
         if(address.equals(input)) {
             return end;
         }
-        return Async.await(BroadcastControllerManager.INSTANCE).unsubscribe(BroadcastAddressData.create(address, input), EXECUTOR);
+        BroadcastController.unsubscribe(BroadcastAddressData.create(address, input));
+        return end;
     }
 
     @Override

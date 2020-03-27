@@ -18,8 +18,6 @@ package com.metaring.framework.broadcast;
 
 import java.util.concurrent.CompletableFuture;
 
-import com.ea.async.Async;
-
 public class ContactFunctionalityImpl extends ContactFunctionality {
 
     @Override
@@ -29,7 +27,7 @@ public class ContactFunctionalityImpl extends ContactFunctionality {
 
     @Override
     protected CompletableFuture<Void> call(SingleCallback input) throws Exception {
-        return Async.await(BroadcastControllerManager.INSTANCE).callback(input, EXECUTOR);
+        return BroadcastController.callback(input, EXECUTOR);
     }
 
     @Override
